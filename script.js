@@ -65,6 +65,7 @@ function playRound(playerSelection,computerSelection){
     }
     else{
         return "Error. Please Choose between Rock, Paper, Scissor";
+        
     }
 
 }
@@ -81,13 +82,24 @@ function computerPlay() {
 function capitalize(string) {
   string = string.toLowerCase();
   let first_letter = string.slice(0, 1);
-  console.log(first_letter);
   return string.replace(first_letter, first_letter.toUpperCase());
 };
 
-const playerSelection = prompt("Choose: Rock, Paper, Scissor","");
-const computerSelection = computerPlay();
-//const playerSelection = "Rock"
+//let playerSelection = prompt("Choose: Rock, Paper, Scissor","");
+//let computerSelection = computerPlay();
 
 
-console.log(playRound(playerSelection,computerSelection));
+//console.log(playRound(playerSelection,computerSelection));
+
+function game(num = 5){
+    
+    for(let i = 1; i <= num;i++){
+        let playerSelection = prompt("Choose: Rock, Paper, Scissor","");
+        let computerSelection = computerPlay();
+        //playRound(playerSelection,computerSelection);
+        console.log(playRound(playerSelection,computerSelection));
+    }
+ 
+}
+
+console.log(game(2));
