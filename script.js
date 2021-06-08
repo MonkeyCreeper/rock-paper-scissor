@@ -1,26 +1,27 @@
 function playRound(e) {
-  
   let playerSelection = this.id;
   let computerSelection = computerPlay();
   console.log(computerSelection + " PC");
+  console.log(playerSelection + " Player");
   //playerSelection = capitalize(playerSelection);
 
   if (playerSelection === computerSelection) {
-    console.log( "Tie");
+    document.getElementById("result").innerHTML = "Tie";
   } else if (playerSelection === "Rock" && computerSelection === "Scissor") {
-    console.log( "You Win! Rock beats Scissor");
+    document.getElementById("result").innerHTML = "You Win! Rock beats Scissor";
   } else if (playerSelection === "Rock" && computerSelection === "Paper") {
-    console.log( "You Loose! Paper beats Rock");
+    document.getElementById("result").innerHTML = "You Loose! Paper beats Rock";
   } else if (playerSelection === "Paper" && computerSelection === "Scissor") {
-    console.log( "You Loose! Scissor beats Paper");
+    document.getElementById("result").innerHTML =
+      "You Loose! Scissor beats Paper";
   } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-    console.log( "You Win! Paper beats Rock");
+    document.getElementById("result").innerHTML = "You Win! Paper beats Rock";
   } else if (playerSelection === "Scissor" && computerSelection === "Paper") {
-    console.log( "You Win! Scissor beats Paper");
+    document.getElementById("result").innerHTML =
+      "You Win! Scissor beats Paper";
   } else if (playerSelection === "Scissor" && computerSelection === "Rock") {
-    console.log( "You Loose! Rock beats Scissor" );
-  } else {
-    console.log( "Error. Please Choose between Rock, Paper, Scissor");
+    document.getElementById("result").innerHTML =
+      "You Loose! Rock beats Scissor";
   }
 }
 
@@ -41,22 +42,9 @@ function capitalize(string) {
 //let playerSelection = prompt("Choose: Rock, Paper, Scissor","");
 //let computerSelection = computerPlay();
 
-
-function printConsole(e){
-    console.log(e);
+function printConsole(e) {
+  console.log(e);
 }
 
 const playbuttons = document.querySelectorAll(".button");
-playbuttons.forEach(button => 
-        button.addEventListener("click", playRound)
-        );
-
-
-
-
-
-
-
-
-
-
+playbuttons.forEach((button) => button.addEventListener("click", playRound));
