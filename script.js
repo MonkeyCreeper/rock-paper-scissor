@@ -1,28 +1,68 @@
-function playRound(e) {
-  let playerSelection = this.id;
+let playerScore = 0;
+let computerScore = 0;
+
+// playing one Round of Rock Paper Scissor
+function playRound(playerSelection) {
+ 
   let computerSelection = computerPlay();
+
   console.log(computerSelection + " PC");
   console.log(playerSelection + " Player");
-  //playerSelection = capitalize(playerSelection);
 
   if (playerSelection === computerSelection) {
-    document.getElementById("result").innerHTML = "Tie";
-  } else if (playerSelection === "Rock" && computerSelection === "Scissor") {
-    document.getElementById("result").innerHTML = "You Win! Rock beats Scissor";
-  } else if (playerSelection === "Rock" && computerSelection === "Paper") {
-    document.getElementById("result").innerHTML = "You Loose! Paper beats Rock";
-  } else if (playerSelection === "Paper" && computerSelection === "Scissor") {
-    document.getElementById("result").innerHTML =
-      "You Loose! Scissor beats Paper";
-  } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-    document.getElementById("result").innerHTML = "You Win! Paper beats Rock";
-  } else if (playerSelection === "Scissor" && computerSelection === "Paper") {
-    document.getElementById("result").innerHTML =
-      "You Win! Scissor beats Paper";
-  } else if (playerSelection === "Scissor" && computerSelection === "Rock") {
-    document.getElementById("result").innerHTML =
-      "You Loose! Rock beats Scissor";
+    document.getElementById("result").innerHTML = "Tie!";
+  } //case of Tie
+  else if (
+    (playerSelection === "Rock" && computerSelection === "Scissor") ||
+    (playerSelection === "Scissor" && computerSelection === "Paper") ||
+    (playerSelection === "Paper" && computerSelection === "Rock")
+  ) {
+    playerScore += 1;
+    document.getElementById("result").innerHTML = "You Win!";
+    document.getElementById(
+      "scoreboard"
+    ).innerHTML = `Score: ${playerScore} : ${computerScore}`;
+  } //case of Player won round 
+  else if (
+    (playerSelection === "Rock" && computerSelection === "Paper") ||
+    (playerSelection === "Paper" && computerSelection === "Scissor") ||
+    (playerSelection === "Scissor" && computerSelection === "Rock")
+  ) {
+    computerScore += 1;
+    document.getElementById("result").innerHTML = "You Loose!";
+    document.getElementById(
+      "scoreboard"
+    ).innerHTML = `Score: ${playerScore} : ${computerScore}`;
+  }//case of Player lost round 
+}
+//function to keep track of the Scoreboard, ressetting when one side reached 5 victorypoints
+function trackScore() {
+  console.log(playerScore);
+  console.log(computerScore);
+  if ((playerScore == 5)) {
+    document.getElementById(
+      "scoreboard"
+    ).innerHTML = `Congratulations! You won the Game!`;
+    playerScore = 0;
+    computerScore = 0;
+  } else if ((computerScore == 5)) {
+    document.getElementById(
+      "scoreboard"
+    ).innerHTML = `Too Bad! You lost the Game!`;
+    playerScore = 0;
+    computerScore = 0;
+  } else {
+    document.getElementById(
+      "scoreboard"
+    ).innerHTML = `Score: ${playerScore} : ${computerScore}`;
   }
+}
+//playing the Game
+function playGame(e) {
+  let playerSelection = this.id;
+  console.log(playerSelection);
+  playRound(playerSelection);
+  trackScore(e);
 }
 
 function computerPlay() {
@@ -32,19 +72,10 @@ function computerPlay() {
   let x = Math.round(Math.random() * (max - min)) + min;
   return choices[x];
 }
-//function to change rock,RoCK, RocK into Rock, standarize input
-function capitalize(string) {
-  string = string.toLowerCase();
-  let first_letter = string.slice(0, 1);
-  return string.replace(first_letter, first_letter.toUpperCase());
-}
-
-//let playerSelection = prompt("Choose: Rock, Paper, Scissor","");
-//let computerSelection = computerPlay();
 
 function printConsole(e) {
   console.log(e);
 }
 
 const playbuttons = document.querySelectorAll(".button");
-playbuttons.forEach((button) => button.addEventListener("click", playRound));
+playbuttons.forEach((button) => button.addEventListener("click", playGame));
